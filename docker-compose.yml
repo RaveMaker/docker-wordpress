@@ -1,0 +1,82 @@
+version: '3.7'
+
+services:
+
+  mariadb:
+    image: mariadb
+    restart: unless-stopped
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=false"
+    environment:
+      MYSQL_DATABASE: ${dbName}
+      MYSQL_USER: ${dbUser}
+      MYSQL_PASSWORD: ${dbPass}
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./database:/var/lib/mysql
+
+  wordpress:
+    build: .
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    networks:
+      - frontend
+      - backend
+    labels:
+      - "traefik.backend=${podName}-wordpress"
+      - "traefik.frontend.rule=Host:${hostRule}"
+      - "traefik.docker.network=${podName}_frontend"
+      - "traefik.port=80"
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: ${dbUser}
+      WORDPRESS_DB_PASSWORD: ${dbPass}
+      WORDPRESS_DB_NAME: ${dbName}
+    volumes:
+      - ./themes:/var/www/html/wp-content/themes
+      - ./plugins:/var/www/html/wp-content/plugins
+      - ./uploads:/var/www/html/wp-content/uploads
+      - ./ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
+
+  backup:
+    image: zeenlym/mariadb-backup
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=false"
+    environment:
+      - TIMEZONE=Asia/Jerusalem
+      - SCHEDULE=0 0 3 * *
+      - BACKUP_METHOD=mysqldump
+      - MYSQL_HOST=mariadb
+      - MYSQL_DATABASE=${dbName}
+      - MYSQL_USER=${dbUser}
+      - MYSQL_PASSWORD=${dbPass}
+    volumes:
+      - ./backup:/backup
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+    networks:
+      - frontend
+      - backend
+    environment:
+      - ADMINER_DEFAULT_SERVER=mariadb
+    labels:
+      - "traefik.backend=${podName}-adminer"
+      - "traefik.frontend.rule=Host:adminer.${hostRule}"
+      - "traefik.docker.network=${podName}_frontend"
+      - "traefik.port=8080"
+
+networks:
+  frontend:
+  backend:

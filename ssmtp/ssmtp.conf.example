@@ -1,0 +1,25 @@
+# The user that gets all the mails (UID < 1000, usually the admin)
+root=username@gmail.com
+
+# The mail server (where the mail is sent to), both port 465 or 587 should be acceptable
+# See also https://support.google.com/mail/answer/78799
+mailhub=smtp.gmail.com:587
+
+# The address where the mail appears to come from for user authentication.
+rewriteDomain=gmail.com
+
+# The full hostname.  Must be correctly formed, fully qualified domain name or GMail will reject connection.
+hostname=yourlocalhost.yourlocaldomain.tld
+
+# Use SSL/TLS before starting negotiation
+UseTLS=Yes
+UseSTARTTLS=Yes
+
+# Username/Password
+AuthUser=username
+AuthPass=password
+AuthMethod=LOGIN
+
+# Email 'From header's can override the default domain?
+FromLineOverride=yes
+

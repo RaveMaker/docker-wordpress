@@ -39,7 +39,7 @@ services:
       - ./themes:/var/www/html/wp-content/themes
       - ./plugins:/var/www/html/wp-content/plugins
       - ./uploads:/var/www/html/wp-content/uploads
-      - ./ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
+      - ./ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
 
   backup:
     image: zeenlym/mariadb-backup

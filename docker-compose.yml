@@ -51,7 +51,7 @@ services:
     labels:
       - "traefik.enable=false"
     environment:
-      - TIMEZONE=Asia/Jerusalem
+      - TIMEZONE=${timeZone}
       - SCHEDULE=0 0 3 * *
       - BACKUP_METHOD=mysqldump
       - MYSQL_HOST=mariadb

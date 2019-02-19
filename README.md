@@ -7,7 +7,7 @@ docker-compose file includes:
  - Adminer
  - Backup
 
-## Installation
+## Setup
 1. clone the repo
 2. edit .env file
 3. create ssmtp/ssmtp.conf from provided ssmtp.conf.example

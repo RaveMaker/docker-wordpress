@@ -71,7 +71,7 @@ services:
       - ADMINER_DEFAULT_SERVER=mariadb
     labels:
       - "traefik.backend=${podName}-adminer"
-      - "traefik.frontend.rule=Host:adminer.${hostRule}"
+      - "traefik.frontend.rule=Host:${adminerHostRule}"
       - "traefik.docker.network=${podName}_frontend"
       - "traefik.port=8080"
 

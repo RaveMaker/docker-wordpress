@@ -37,7 +37,7 @@ services:
       WORDPRESS_DB_NAME: ${dbName}
     volumes:
       - ./content:/var/www/html/wp-content
-      - ./ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
+      - ./msmtp/msmtprc:/etc/msmtprc
 
   backup:
     image: zeenlym/mariadb-backup

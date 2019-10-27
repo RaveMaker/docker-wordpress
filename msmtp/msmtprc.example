@@ -1,0 +1,8 @@
+account gmail
+tls on
+auth on
+host smtp.gmail.com
+port 587
+user user@gmail.com
+from user@gmail.com
+password P@SSW0RD

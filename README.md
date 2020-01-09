@@ -9,8 +9,8 @@ docker-compose file includes:
 
 ## Setup
 1. clone the repo
-2. edit .env file
-3. create msmtp/msmtprc from provided msmtprc.example
+2. edit `.env` file
+3. create `msmtp/msmtprc` from provided `msmtprc.example`
 
 ## Network settings:
 The stack is divided into two networks, backend and frontend.

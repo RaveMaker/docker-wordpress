@@ -29,7 +29,7 @@ after running docker-compose up you need to connect your reverse proxy to your n
  docker network connect docker-wordpress_frontend PROXY_CONTAINER_NAME
  ```
 
- if you are using my Traefik setup there is a `connect.sh` script included that will connect all your frontend networks to your Traefik container.
+>if you are using my Traefik setup there is a `connect.sh` script included that will connect all your frontend networks to your Traefik container.
 
 Author: [RaveMaker][RaveMaker].
 

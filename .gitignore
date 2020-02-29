@@ -3,3 +3,4 @@ msmtp/msmtprc
 database/
 backup/
 content/
+.env

@@ -4,7 +4,7 @@ services:
 
   mariadb:
     image: mariadb
-    restart: unless-stopped
+    restart: always
     networks:
       - backend
     labels:
@@ -22,7 +22,7 @@ services:
     image: ${podName}/wordpress
     depends_on:
       - mariadb
-    restart: unless-stopped
+    restart: always
     networks:
       - frontend
       - backend
@@ -44,7 +44,7 @@ services:
     image: zeenlym/mariadb-backup
     depends_on:
       - mariadb
-    restart: unless-stopped
+    restart: always
     networks:
       - backend
     labels:
@@ -62,7 +62,7 @@ services:
 
   adminer:
     image: adminer
-    restart: unless-stopped
+    restart: always
     depends_on:
       - mariadb
     networks:

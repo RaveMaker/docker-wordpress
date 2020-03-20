@@ -19,6 +19,7 @@ services:
 
   wordpress:
     build: .
+    image: ${podName}/wordpress
     depends_on:
       - mariadb
     restart: unless-stopped

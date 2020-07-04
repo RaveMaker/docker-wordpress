@@ -2,15 +2,23 @@
 Dockerfile for Wordpress with mSMTP client.
 
 docker-compose file includes:
- - Traefik support
+ - Wordpress
  - MariaDB
- - Adminer
  - Backup
+ - Docker Swarm support
+ - Traefik v2 support
 
 ## Setup:
 1. clone the repo
 2. create `.env` file from `.env.example`
 3. create `msmtp/msmtprc` from `msmtp/msmtprc.example`
+4. copy one of the docker-compose (dev/traefik) templates to `docker-compose.yml`
+
+- to create a docker-compose.prod.yml file for docker swarm run:
+
+```
+docker-compose config > docker-compose.prod.yml
+``` 
 
 ## Network settings:
 The stack is divided into two networks, backend and frontend.
